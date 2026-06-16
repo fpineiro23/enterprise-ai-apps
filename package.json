@@ -1,0 +1,46 @@
+{
+  "name": "enterprise-ai-apps",
+  "version": "1.0.0",
+  "description": "Production-inspired enterprise CS onboarding workflow application built in React. Supports multi-step account setup, compliance attestation, geospatial field mapping, and regulatory program configuration for mass balance SaaS implementations.",
+  "private": false,
+  "type": "module",
+  "scripts": {
+    "dev": "vite",
+    "build": "vite build",
+    "preview": "vite preview",
+    "lint": "eslint src --ext .js,.jsx"
+  },
+  "dependencies": {
+    "lucide-react": "^0.383.0",
+    "react": "^18.3.1",
+    "react-dom": "^18.3.1"
+  },
+  "devDependencies": {
+    "@types/react": "^18.3.1",
+    "@types/react-dom": "^18.3.1",
+    "@vitejs/plugin-react": "^4.3.1",
+    "eslint": "^9.9.0",
+    "eslint-plugin-react-hooks": "^5.1.0",
+    "eslint-plugin-react-refresh": "^0.4.11",
+    "vite": "^5.4.2"
+  },
+  "keywords": [
+    "react",
+    "enterprise",
+    "customer-success",
+    "onboarding",
+    "saas",
+    "workflow",
+    "mass-balance",
+    "compliance",
+    "leaflet",
+    "geospatial",
+    "lcfs",
+    "carbon-intensity"
+  ],
+  "author": "Francisco Piñeiro",
+  "license": "MIT",
+  "engines": {
+    "node": ">=18.0.0"
+  }
+}
