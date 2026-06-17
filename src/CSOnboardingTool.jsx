@@ -41,7 +41,7 @@ const STEPS=[
 const ATTEST_CONTENT={
   lcfs_standard:{
     label:"California LCFS",type:"Standard Attestation Verbiage",
-    source:"SEC — Customer Business Rule Review (LCFS Attestation tab)",
+    source:"Internal BRD — LCFS Attestation Review",
     items:[
       "The feedstock from the farms and fields listed above is sourced from land that was cleared or cultivated prior to January 1, 2008, and actively managed or fallow since January 1, 2008.",
       "Biomass was cultivated and harvested in accordance with all local, State, and federal rules and permits.",
@@ -52,7 +52,7 @@ const ATTEST_CONTENT={
   },
   cfr_standard:{
     label:"Canada CFR",type:"Standard Attestation Verbiage",
-    source:"SEC — Customer Business Rule Review (CFR Attestation tab)",
+    source:"Internal BRD — CFR Attestation Review",
     items:[
       "This feedstock was not harvested from land located in an area that provides a wildlife habitat for any rare, vulnerable, or threatened species.",
       "The feedstock was harvested and transported using measures that monitor, prevent, and control the introduction, spread and establishment of damaging agents, such as pests, invasive species and disease.",
@@ -62,7 +62,7 @@ const ATTEST_CONTENT={
   },
   cfr_ptd:{
     label:"Canada CFR — Biofuel Producer Declaration",type:"PTD Attestation Verbiage",
-    source:"SEC — PTD Edits (Biofuel sheet), SOR/2022-140 Section 58",
+    source:"SOR/2022-140 Section 58",
     items:[
       "This quantity of fuel is eligible under the CFR and is supported through mass balance recordkeeping.",
       "This feedstock was not harvested from land located in an area that provides a wildlife habitat for any rare, vulnerable, or threatened species.",
@@ -426,7 +426,7 @@ function Step1({d,u}){
     </Field>
     <Field label="Feedstock Origin / Traceability System" req>
       <Sel value={d.traceSys} onChange={s("traceSys")}
-        options={["CIBO","CIH","Self-Created / Managed Online Form","Paper Declarations","3rd Party Forms"]}
+        options={["Regrow","Self-Created / Managed Online Form","Paper Declarations","3rd Party Forms"]}
         placeholder="Select primary system…"/>
     </Field>
     <Field label="Do you use 3rd party blanket declarations?" hint="Blanket declarations have no initial feedstock quantities — all quantities filled in at year-end for delivered feedstock">
@@ -441,7 +441,7 @@ function Step1({d,u}){
         {["Supplier Name","Supplier ID",""].map(h=><div key={h} style={{fontSize:11,fontWeight:700,color:G.muted,textTransform:"uppercase",letterSpacing:"0.06em"}}>{h}</div>)}
       </div>
       {(d.blanketSuppliers||[{name:"",id:""}]).map((row,i)=><div key={i} style={{display:"grid",gridTemplateColumns:"1fr 1fr auto",gap:9,marginBottom:9,alignItems:"start"}}>
-        <Inp value={row.name||""} onChange={v=>{const a=[...(d.blanketSuppliers||[{name:"",id:""}])];a[i]={...a[i],name:v};u({...d,blanketSuppliers:a});}} placeholder="e.g. Archer Daniels Midland"/>
+        <Inp value={row.name||""} onChange={v=>{const a=[...(d.blanketSuppliers||[{name:"",id:""}])];a[i]={...a[i],name:v};u({...d,blanketSuppliers:a});}} placeholder="e.g. John Doe Grain Co."/>
         <Inp value={row.id||""} onChange={v=>{const a=[...(d.blanketSuppliers||[{name:"",id:""}])];a[i]={...a[i],id:v};u({...d,blanketSuppliers:a});}} placeholder="Supplier ID"/>
         {i>0?<button onClick={()=>u({...d,blanketSuppliers:(d.blanketSuppliers||[]).filter((_,j)=>j!==i)})} style={{padding:"9px 10px",background:"none",border:`1.5px solid ${G.border}`,borderRadius:8,cursor:"pointer",color:G.danger}}><X size={13}/></button>:<div style={{width:38}}/>}
       </div>)}
@@ -450,8 +450,8 @@ function Step1({d,u}){
     <Field label="Connections to Existing Network Businesses" hint="List any businesses this account connects to within the existing platform network">
       <TA value={d.netConn} onChange={s("netConn")} placeholder="Business names and relationship type…"/>
     </Field>
-    <Field label="CIBO / Validation Requirements" req>
-      <RadioRow opts={["Yes — enrolled","No — initiate connection","Unknown / TBD"]} val={d.cibo} onChange={s("cibo")}/>
+    <Field label="Third-Party Validation Platform" req>
+      <RadioRow opts={["Yes — integrated","No — not yet connected","Unknown / TBD"]} val={d.cibo} onChange={s("cibo")}/>
     </Field>
   </div>;
 }
@@ -461,16 +461,16 @@ function Step2({d,u}){
   const CHECKS=["Record retention confirmed per program requirements","Carryover volumes policy confirmed (feedstock + fuel)",
     "True-up frequency set (default: monthly)","PTD issuance frequency set (default: per order)","Exception handling rules reviewed (Standards tab)"];
   return <div>
-    <SecHead n="02" title="Business Rules — 2026 Account Setup"/>
+    <SecHead n="02" title="Business Rules — Account Setup"/>
     <div style={{display:"grid",gridTemplateColumns:"1fr 1fr",gap:18}}>
       <Field label="Customer Legal Name" req hint="Full legal entity name as it should appear on contracts and PTDs">
-        <Inp value={d.legalName||""} onChange={s("legalName")} placeholder="e.g. Siouxland Energy Cooperative"/>
+        <Inp value={d.legalName||""} onChange={s("legalName")} placeholder="e.g. Heartland Energy Cooperative"/>
       </Field>
       <Field label="Customer Website" hint="Link to the company website">
         <Inp value={d.website||""} onChange={s("website")} placeholder="https://www.example.com" type="url"/>
       </Field>
     </div>
-    <Info>Use the 2026 Customer Account Setup workbook. Complete all three touchpoints before advancing to Config &amp; Build.</Info>
+    <Info>Complete all three touchpoints with the customer before advancing to Config &amp; Build.</Info>
     <Field label="Commercial Handoff Status" req hint="Indicates whether Commercial has confirmed the client is aware they need to complete this process and CS is cleared to proceed">
       <RadioRow opts={[
         "Pending — awaiting Commercial handoff",
@@ -548,7 +548,7 @@ function Step4({d,u}){
   };
   return <div>
     <SecHead n="04" title="Attestation & Compliance Documentation"/>
-    <Info>Standard attestation verbiage is pre-filled from approved SEC templates. Review each section and either accept as-is or modify for this customer.</Info>
+    <Info>Standard attestation verbiage is pre-filled from approved regulatory templates. Review each section and either accept as-is or modify for this customer.</Info>
     <Field label="Program-Specific Attestation Scope" req hint="Select all programs requiring attestation setup">
       <div style={{display:"grid",gridTemplateColumns:"1fr 1fr 1fr",gap:11}}>
         {ATTEST_PROGS.map(p=><div key={p} onClick={()=>tP(p)} style={{padding:"14px 15px",

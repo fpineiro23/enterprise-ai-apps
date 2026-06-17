@@ -1,5 +1,7 @@
 # Enterprise CS Onboarding Tool
 
+**[→ Live Demo](https://enterprise-cs-onboarding.netlify.app/)** · [GitHub](https://github.com/fpineiro23/enterprise-ai-apps)
+
 A production-inspired, multi-step customer onboarding workflow application built in React. Designed to support Customer Success, SaaS Implementation, and Solutions teams managing complex enterprise account setups — including compliance documentation, data integration configuration, geospatial field mapping, and regulatory attestation.
 
 ---
@@ -115,7 +117,7 @@ Open `http://localhost:5173` in your browser.
 
 ## Screenshots
 
-> _Screenshots coming soon — the tool includes a full 9-step sidebar navigation, interactive Leaflet map, attestation management interface, and dynamic inventory intake form._
+> **[Try the live demo →](https://enterprise-cs-onboarding.netlify.app/)** — includes a full 9-step sidebar navigation, interactive Leaflet map, attestation management interface, and dynamic inventory intake form.
 
 ---
 
